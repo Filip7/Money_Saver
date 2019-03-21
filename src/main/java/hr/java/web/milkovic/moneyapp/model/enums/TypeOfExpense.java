@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum TypeOfExpense {
-    Hrana,
-    NadogradnjaRacunala,
-    NadogradnjaKuce,
-    Auto,
-    Benzin
+    HRANA,
+    NADOGRADNJA_RACUNALA,
+    NADOGRADNJA_KUCE,
+    AUTO,
+    BENZIN
 }

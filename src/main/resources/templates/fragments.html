@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"/>
+    <link rel="icon" th:href="@{/res/baseline_monetization_on_black_18dp.png}" type="image/gif" sizes="16x16"/>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <title>Money saver</title>
+</head>
+<body>
+<div th:fragment="navbar" id="logo-title">
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/res/baseline_euro_symbol_black_18dp.png}" width="36" height="36"
+                 class="d-inline-block align-top" alt="" style="margin-top: 10px;">
+            <div class="custom-h1 d-inline-block align-top">Money saver</div>
+        </a>
+    </nav>
+    <br>
+</div>
+
+<div th:fragment="footer" id="foot">
+    <footer class="footer">
+        <div>
+            <span style="padding-left: 3%">Filip M.</span>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
