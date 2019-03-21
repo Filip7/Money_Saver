@@ -3,13 +3,13 @@ package hr.java.web.milkovic.moneyapp.controller;
 import hr.java.web.milkovic.moneyapp.model.Expense;
 import hr.java.web.milkovic.moneyapp.model.enums.TypeOfExpense;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
