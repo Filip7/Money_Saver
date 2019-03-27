@@ -9,7 +9,7 @@
 
 <div class="container">
     <div>
-        <p th:text="'Uspješno ste unijeli trošak ' + ${expense.name} + ' u iznosu od ' + ${expense.sum} + ' kn.'"><br>
+        <p th:text="'Uspješno ste unijeli trošak ' + ${expense.name} + ' u iznosu od ' + ${expense.getAmount} + ' kn.'"><br>
         <p th:text="'Trošak je unesen pod kategoriju ' + ${expense.typeOfExpense} + ' na datum ' + ${currentDate} + '.'">
             <br>
     </div>

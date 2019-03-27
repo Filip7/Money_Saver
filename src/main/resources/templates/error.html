@@ -5,6 +5,19 @@
     <title>Money saver</title>
 </head>
 <body>
-<h1>Error</h1>
+<div th:replace="fragments::navbar"></div>
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Stranica ne postoji!</h1>
+    </div>
+    <div class="row align-items-center">
+        <a th:href="@{/}">
+            <button type="button" class="btn-default text-light">
+                <span class="glyphicon glyphicon-chevron-left"></span> Povratak na početnu stranicu
+            </button>
+        </a>
+    </div>
+</div>
+<div th:replace="fragments::footer"></div>
 </body>
 </html>
