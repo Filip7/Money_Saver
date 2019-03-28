@@ -9,13 +9,17 @@
 
 <div class="container">
     <div>
-        <p th:text="'Uspješno ste unijeli trošak ' + ${expense.name} + ' u iznosu od ' + ${expense.getAmount} + ' kn.'"><br>
+        <p th:text="'Uspješno ste unijeli trošak ' + ${expense.name} + ' u iznosu od ' + ${expense.amount} + ' kn.'"><br>
         <p th:text="'Trošak je unesen pod kategoriju ' + ${expense.typeOfExpense} + ' na datum ' + ${currentDate} + '.'">
+        <p th:text="'Stanje u novćaniku je: ' + ${wallet.sum}"></p>
             <br>
     </div>
     <div>
         <a th:href="@{/expenses/new}">
-            <button type="button" class="btn btn-primary">Povratak</button>
+            <button type="button" class="btn btn-primary">Unesi novi trošak</button>
+        </a>
+        <a th:href="@{/expenses/reset-wallet}">
+            <button type="button" class="btn btn-danger">Očisti novčanik</button>
         </a>
     </div>
 </div>

@@ -13,32 +13,31 @@
             <label class="control-label col-sm-2" for="name">Naziv: </label>
             <div class="col-sm-10">
                 <input class="form-control" type="text" th:field="*{name}" placeholder="Unesite naziv troška" id="name"
-                       required>
-                <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
-                th:errors="*{name}">Ime ima error</span>
+                       >
+                <span class="alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="type">Vrsta: </label>
             <div class="col-sm-10">
-                <select class="form-control" th:field="*{typeOfExpense}" id="type" required>
+                <select class="form-control" th:field="*{typeOfExpense}" id="type" >
                     <option value="">--- Odaberite vrijednost ---</option>
-                    <option th:each="type : ${typesOfExpenses}" th:value="${type}"
+                    <option th:each="type : ${typeOfExpense}" th:value="${type}"
                             th:text="${type}"></option>
                 </select>
-                <span class="invalid-feedback" th:if="${#fields.hasErrors('typeOfExpense')}"
-                      th:errors="*{typeOfExpense}">Ime ima error</span>
+                <span class="alert-warning" th:if="${#fields.hasErrors('typeOfExpense')}"
+                      th:errors="*{typeOfExpense}"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="amount">Iznos: </label>
             <div class="col-sm-10">
-                <input class="form-control" type="number" step="0.01" min="0.01" id="sum" required th:field="*{getAmount}"
+                <input class="form-control" type="number" step="1" min="1" id="amount" th:field="*{amount}"
                        placeholder="0.00">
-                <span class="invalid-feedback" th:if="${#fields.hasErrors('amount')}"
-                      th:errors="*{amount}">Ime ima error</span>
+                <span class="alert-warning" th:if="${#fields.hasErrors('amount')}"
+                      th:errors="*{amount}"></span>
             </div>
         </div>
 
