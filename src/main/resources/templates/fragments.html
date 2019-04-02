@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +18,9 @@
             <img th:src="@{/res/baseline_euro_symbol_black_18dp.png}" width="36" height="36"
                  class="d-inline-block align-top" alt="" style="margin-top: 10px;">
             <div class="custom-h1 d-inline-block align-top">Money saver</div>
+        </a>
+        <a th:href="@{/logout}">
+            <button type="button" class="btn btn-danger">Logout</button>
         </a>
     </nav>
     <br>
