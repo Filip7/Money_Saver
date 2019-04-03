@@ -19,8 +19,29 @@
                  class="d-inline-block align-top" alt="" style="margin-top: 10px;">
             <div class="custom-h1 d-inline-block align-top">Money saver</div>
         </a>
-        <a th:href="@{/logout}">
-            <button type="button" class="btn btn-danger">Logout</button>
+        <div class="dropdown">
+            <div class="dropbtn">
+                <span sec:authentication="name">Korisnik</span>
+                <span>⯆</span>
+            </div>
+            <div class="dropdown-content">
+                <a>
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" class="btn btn-danger" value="Odjava"/>
+                    </form>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <br>
+</div>
+
+<div th:fragment="navbar-login" id="logo-tit">
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/res/baseline_euro_symbol_black_18dp.png}" width="36" height="36"
+                 class="d-inline-block align-top" alt="" style="margin-top: 10px;">
+            <div class="custom-h1 d-inline-block align-top">Money saver</div>
         </a>
     </nav>
     <br>

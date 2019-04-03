@@ -1,10 +1,13 @@
 package hr.java.web.milkovic.moneyapp;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -14,12 +17,12 @@ public class MoneyAppSecurityConfiguration extends WebSecurityConfigurerAdapter 
     public void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth
                 .inMemoryAuthentication()
-                .withUser("admin")
-                .password("{noop}adminpass")
+                .withUser("king")
+                .password(passwordEncoder().encode("kingpass"))
                 .roles("ADMIN", "USER")
                 .and()
                 .withUser("user")
-                .password("{noop}userpassword")
+                .password(passwordEncoder().encode("userpass"))
                 .roles("USER");
     }
 
@@ -27,16 +30,31 @@ public class MoneyAppSecurityConfiguration extends WebSecurityConfigurerAdapter 
     protected void configure(HttpSecurity http) throws Exception{
         http
                 .authorizeRequests()
-                .antMatchers("/expense/**")
-                .hasRole("USER")
-                .antMatchers("/**").permitAll()
+                    .antMatchers("/res")
+                        .permitAll()
+                    .antMatchers("/css")
+                        .permitAll()
+                    .antMatchers("/js")
+                        .permitAll()
+                    .antMatchers("/login")
+                        .permitAll()
+                    .antMatchers("/")
+                        .authenticated()
+                    .antMatchers("/expenses/**")
+                        .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/expense/new/", true)
+                    .loginPage("/login")
+                     .permitAll()
+                .defaultSuccessUrl("/", true)
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login");
+                    .permitAll();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }
