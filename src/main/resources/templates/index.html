@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments::head">
     <meta charset="UTF-8">
@@ -10,10 +9,13 @@
 <div th:replace="fragments::navbar"></div>
 
 <div class="container">
-    <div>
-        <a th:href="@{/expenses/new}">
-            <button type="button" class="btn btn-primary">Unesi novi trošak</button>
-        </a>
+
+    <div class="card" style="width:400px">
+        <img class="card-img-top" th:src="@{/res/piggy-bank.png}" title="Icon made by Freepik www.flaticon.com" alt="Cover image"
+             style="width:100%">
+        <div class="card-body">
+            <a th:href="@{/expenses/new}" class="btn btn-primary stretched-link">Unesi novi trošak</a>
+        </div>
     </div>
 </div>
 

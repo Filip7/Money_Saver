@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments::head">
     <meta charset="UTF-8">
@@ -8,50 +7,56 @@
 <body>
 <div th:replace="fragments::navbar"></div>
 
-<div class="container">
-    <h3>Unos novog troška</h3>
-    <form class="form-horizontal" method="POST" th:object="${expense}" th:action="@{/expenses/}">
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="name">Naziv: </label>
-            <div class="col-sm-10">
-                <input class="form-control mx-auto ml-auto" type="text" th:field="*{name}" placeholder="Unesite naziv troška" id="name"
-                       >
-                <span class="alert-danger mx-auto ml-auto" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-            </div>
-        </div>
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
+        <div class="container">
+            <h3>Unos novog troška</h3>
+            <form class="form-horizontal" method="POST" th:object="${expense}" th:action="@{/expenses/}">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="name">Naziv: </label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" th:field="*{name}"
+                               placeholder="Unesite naziv troška" id="name">
+                        <span class="alert-danger mx-auto ml-auto" th:if="${#fields.hasErrors('name')}"
+                              th:errors="*{name}"></span>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label class="control-label col-sm-2 mx-auto ml-auto" for="type">Vrsta: </label>
-            <div class="col-sm-10">
-                <select class="form-control mx-auto ml-auto" th:field="*{typeOfExpense}" id="type" >
-                    <option value="">--- Odaberite vrijednost ---</option>
-                    <option th:each="type : ${typeOfExpense}" th:value="${type}"
-                            th:text="${type}"></option>
-                </select>
-                <span class="alert-danger" th:if="${#fields.hasErrors('typeOfExpense')}"
-                      th:errors="*{typeOfExpense}"></span>
-            </div>
-        </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="type">Vrsta: </label>
+                    <div class="col-sm-10">
+                        <select class="form-control" th:field="*{typeOfExpense}" id="type">
+                            <option value="">--- Odaberite vrijednost ---</option>
+                            <option th:each="type : ${typeOfExpense}" th:value="${type}"
+                                    th:text="${type}"></option>
+                        </select>
+                        <span class="alert-danger" th:if="${#fields.hasErrors('typeOfExpense')}"
+                              th:errors="*{typeOfExpense}"></span>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="amount">Iznos: </label>
-            <div class="col-sm-10">
-                <input class="form-control" type="number" step="1" min="1" id="amount" th:field="*{amount}"
-                       placeholder="0.00">
-                <span class="alert-danger" th:if="${#fields.hasErrors('amount')}"
-                      th:errors="*{amount}"></span>
-            </div>
-        </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="amount">Iznos: </label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="number" step="1" min="1" id="amount" th:field="*{amount}"
+                               placeholder="0.00">
+                        <span class="alert-danger" th:if="${#fields.hasErrors('amount')}"
+                              th:errors="*{amount}"></span>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Spremi</button>
-            </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Spremi</button>
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            </form>
         </div>
-        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-    </form>
+    </div>
+    <div class="col"></div>
 </div>
-
 <div th:replace="fragments::footer"></div>
 </body>
 </html>

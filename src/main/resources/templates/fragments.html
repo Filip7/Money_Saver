@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
     <meta charset="UTF-8">
@@ -8,24 +7,28 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"/>
     <link rel="icon" th:href="@{/res/baseline_monetization_on_black_18dp.png}" type="image/gif" sizes="16x16"/>
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <title>Money saver</title>
 </head>
 <body>
 <div th:fragment="navbar" id="logo-title">
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-dark bg-primary sticky-top">
         <a class="navbar-brand" th:href="@{/}">
             <img th:src="@{/res/baseline_euro_symbol_black_18dp.png}" width="36" height="36"
                  class="d-inline-block align-top" alt="" style="margin-top: 10px;">
             <div class="custom-h1 d-inline-block align-top">Money saver</div>
         </a>
-        <div class="dropdown">
-            <div class="dropbtn">
-                <span sec:authentication="name">Korisnik</span>
-                <span>⯆</span>
-            </div>
-            <div class="dropdown-content">
-                <a>
+
+        <div class="dropdown dropleft">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                    sec:authentication="name">
+                Korisnik
+            </button>
+            <div class="dropdown-menu">
+                <div class="dropdown-header">Akcija</div>
+                <a class="dropdown-item" href="#">
                     <form th:action="@{/logout}" method="post">
                         <input type="submit" class="btn btn-danger" value="Odjava"/>
                     </form>

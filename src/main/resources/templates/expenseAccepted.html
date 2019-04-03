@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments::head">
     <meta charset="UTF-8">
@@ -9,24 +8,29 @@
 <body>
 <div th:replace="fragments::navbar"></div>
 
-<div class="container">
-    <div>
-        <p th:text="'Uspješno ste unijeli trošak ' + ${expense.name} + ' u iznosu od ' + ${expense.amount} + ' kn.'">
-            <br>
-        <p th:text="'Trošak je unesen pod kategoriju ' + ${expense.typeOfExpense} + ' na datum ' + ${currentDate} + '.'">
-        <p th:text="'Stanje u novćaniku je: ' + ${wallet.sum}"></p>
-        <br>
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
+        <div class="container">
+            <div>
+                <p th:text="'Uspješno ste unijeli trošak ' + ${expense.name} + ' u iznosu od ' + ${expense.amount} + ' kn.'">
+                    <br>
+                <p th:text="'Trošak je unesen pod kategoriju ' + ${expense.typeOfExpense} + ' na datum ' + ${currentDate} + '.'">
+                <p th:text="'Stanje u novćaniku je: ' + ${wallet.sum}"></p>
+                <br>
+            </div>
+            <div>
+                <a th:href="@{/expenses/new}">
+                    <button type="button" class="btn btn-primary">Unesi novi trošak</button>
+                </a>
+                <a th:href="@{/expenses/reset-wallet}" sec:authorize="hasRole('ADMIN')">
+                    <button type="button" class="btn btn-danger">Resetiraj novčanik</button>
+                </a>
+            </div>
+        </div>
     </div>
-    <div>
-        <a th:href="@{/expenses/new}">
-            <button type="button" class="btn btn-primary">Unesi novi trošak</button>
-        </a>
-        <a th:href="@{/expenses/reset-wallet}" sec:authorize="hasRole('ADMIN')">
-            <button type="button" class="btn btn-danger">Resetiraj novčanik</button>
-        </a>
-    </div>
+    <div class="col"></div>
 </div>
-
 <div th:replace="fragments::footer"></div>
 </body>
 </HTML>
