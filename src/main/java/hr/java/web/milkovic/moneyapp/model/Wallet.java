@@ -19,10 +19,7 @@ public class Wallet {
     }
 
     public void updateSum() {
-        sum = expenses.stream().map(Expense::getAmount).reduce(BigDecimal::add).get();
+        sum = expenses.stream().map(expense -> expense.getAmount().negate()).reduce(BigDecimal::add).get();
     }
 
-    public void addExpense(Expense expense) {
-        expenses.add(expense);
-    }
 }

@@ -55,7 +55,7 @@ public class MoneyAppController {
 
         model.addAttribute("currentDate", currentDate);
 
-        wallet.addExpense(expense);
+        wallet.getExpenses().add(expense);
         wallet.updateSum();
         model.addAttribute("wallet", wallet);
 
