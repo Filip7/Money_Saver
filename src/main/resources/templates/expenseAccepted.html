@@ -13,7 +13,7 @@
     <div class="col">
         <div class="container">
             <div>
-                <p th:text="'Uspješno ste unijeli trošak ' + ${expense.name} + ' u iznosu od ' + ${expense.amount} + ' kn.'">
+                <p th:text="'Uspješno ste unijeli trošak ' + ${expense.name} + ' u iznosu od ' + ${expense.cost} + ' kn.'">
                     <br>
                 <p th:text="'Trošak je unesen pod kategoriju ' + ${expense.typeOfExpense} + ' na datum ' + ${currentDate} + '.'">
                 <p th:text="'Stanje u novćaniku je: ' + ${wallet.sum}"></p>

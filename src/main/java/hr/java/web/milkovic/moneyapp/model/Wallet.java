@@ -9,9 +9,11 @@ import java.util.List;
 
 @Data
 public class Wallet {
+    private Long id;
     private BigDecimal sum;
     private List<Expense> expenses;
     private TypeOfWallet typeOfWallet;
+    private Long userId;
 
     public Wallet() {
         sum = new BigDecimal(0);
@@ -19,7 +21,7 @@ public class Wallet {
     }
 
     public void updateSum() {
-        sum = expenses.stream().map(expense -> expense.getAmount().negate()).reduce(BigDecimal::add).get();
+        sum = expenses.stream().map(expense -> expense.getCost().negate()).reduce(BigDecimal::add).get();
     }
 
 }

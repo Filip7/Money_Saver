@@ -3,6 +3,8 @@ package hr.java.web.milkovic.moneyapp.controller;
 import hr.java.web.milkovic.moneyapp.model.Expense;
 import hr.java.web.milkovic.moneyapp.model.Wallet;
 import hr.java.web.milkovic.moneyapp.model.enums.TypeOfExpense;
+import hr.java.web.milkovic.moneyapp.repository.JDBCExpenseRepositoryImpl;
+import hr.java.web.milkovic.moneyapp.repository.JDBCWalletRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -19,6 +22,15 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/expenses")
 @SessionAttributes({"typeOfExpense", "wallet"})
 public class MoneyAppController {
+
+    private final JDBCExpenseRepositoryImpl expenseRepository;
+    private final JDBCWalletRepositoryImpl walletRepository;
+
+    public MoneyAppController(JDBCExpenseRepositoryImpl expenseRepository, JDBCWalletRepositoryImpl walletRepository) {
+
+        this.expenseRepository = expenseRepository;
+        this.walletRepository = walletRepository;
+    }
 
     @ModelAttribute("typeOfExpense")
     public TypeOfExpense[] getTypesOfExpenses(){
@@ -33,7 +45,6 @@ public class MoneyAppController {
 
         model.addAttribute("expense", new Expense());
         model.addAttribute("typeOfExpense", TypeOfExpense.values());
-        //model.addAttribute("wallet", new Wallet());
 
         return "insertExpense";
     }
@@ -47,6 +58,9 @@ public class MoneyAppController {
             return "insertExpense";
         }
 
+        expense.setWalletId(wallet.getId());
+        expense = expenseRepository.save(expense);
+
         model.addAttribute("expense", expense);
 
         LocalDate date = LocalDate.now();
@@ -55,16 +69,22 @@ public class MoneyAppController {
 
         model.addAttribute("currentDate", currentDate);
 
+
         wallet.getExpenses().add(expense);
         wallet.updateSum();
+        wallet = walletRepository.save(wallet);
+
         model.addAttribute("wallet", wallet);
 
         return "expenseAccepted";
     }
 
     @GetMapping("/reset-wallet")
-    public String resetWallet(SessionStatus sessionStatus){
+    public String resetWallet(SessionStatus sessionStatus, Wallet wallet){
         log.info("Wallet reset");
+        wallet.setSum(new BigDecimal(0));
+        walletRepository.save(wallet);
+
         sessionStatus.setComplete();
 
         return "redirect:/expenses/new";

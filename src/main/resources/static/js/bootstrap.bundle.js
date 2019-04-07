@@ -1784,7 +1784,7 @@
    * @memberof Popper.Utils
    * @argument {Element} element
    * @argument {String} side `top` or `left`
-   * @returns {number} amount of scrolled pixels
+   * @returns {number} cost of scrolled pixels
    */
   function getScroll(element) {
     var side = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';

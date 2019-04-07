@@ -37,12 +37,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="amount">Iznos: </label>
+                    <label class="control-label col-sm-2" for="cost">Iznos: </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="number" step="1" min="1" id="amount" th:field="*{amount}"
+                        <input class="form-control" type="number" step="1" min="1" id="cost" th:field="*{cost}"
                                placeholder="0.00">
-                        <span class="alert-danger" th:if="${#fields.hasErrors('amount')}"
-                              th:errors="*{amount}"></span>
+                        <span class="alert-danger" th:if="${#fields.hasErrors('cost')}"
+                              th:errors="*{getCost}"></span>
                     </div>
                 </div>
 
@@ -51,7 +51,6 @@
                         <button type="submit" class="btn btn-primary">Spremi</button>
                     </div>
                 </div>
-                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
             </form>
         </div>
     </div>
