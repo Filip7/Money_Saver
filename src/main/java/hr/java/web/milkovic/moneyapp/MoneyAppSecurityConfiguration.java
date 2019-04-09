@@ -35,11 +35,7 @@ public class MoneyAppSecurityConfiguration extends WebSecurityConfigurerAdapter 
         http
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/login")
-                .permitAll()
-                .antMatchers("/expenses/reset-wallet")
-                .access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/h2-console/**")
+                .antMatchers("/expenses/reset-wallet", "/h2-console/**")
                 .access("hasRole('ROLE_ADMIN')")
                 .anyRequest()
                 .authenticated()
@@ -56,7 +52,7 @@ public class MoneyAppSecurityConfiguration extends WebSecurityConfigurerAdapter 
 
         http
                 .csrf()
-                .disable();
+                .ignoringAntMatchers("/h2-console/**");
         http
                 .headers()
                 .frameOptions()

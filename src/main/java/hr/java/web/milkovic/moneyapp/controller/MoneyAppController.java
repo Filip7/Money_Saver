@@ -84,7 +84,9 @@ public class MoneyAppController {
         wallet.setSum(new BigDecimal(0));
 
         walletRepository.save(wallet);
-        expenseRepository.deleteByWalletId(wallet.getId());
+        Integer numberOfDeletedExpenses = expenseRepository.deleteByWalletId(wallet.getId());
+
+        log.info("Deleted {} od expenses for user with id {}", numberOfDeletedExpenses, wallet.getUserId());
 
         sessionStatus.setComplete();
 
