@@ -3,17 +3,18 @@ package hr.java.web.milkovic.moneyapp.repository;
 import hr.java.web.milkovic.moneyapp.model.Expense;
 import hr.java.web.milkovic.moneyapp.model.Wallet;
 import hr.java.web.milkovic.moneyapp.model.enums.TypeOfWallet;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.*;
 
+@Slf4j
 @Repository
 public class JDBCWalletRepositoryImpl implements WalletRepository {
 
@@ -31,7 +32,7 @@ public class JDBCWalletRepositoryImpl implements WalletRepository {
 
     @Override
     public Iterable<Wallet> findAll() {
-        return jdbc.query("select id, sum, typeOfWallet, userId from wallet", this::mapRowToWallet);
+        return jdbc.query("select id, sum, typeOfWallet, createDate, userId from wallet", this::mapRowToWallet);
     }
 
     private Wallet mapRowToWallet(ResultSet resultSet, int i) throws SQLException {
@@ -39,6 +40,8 @@ public class JDBCWalletRepositoryImpl implements WalletRepository {
         wallet.setId(resultSet.getLong("id"));
         wallet.setSum(resultSet.getBigDecimal("sum"));
         wallet.setTypeOfWallet(TypeOfWallet.valueOf(resultSet.getString("typeOfWallet")));
+        Timestamp createDate = resultSet.getTimestamp("createDate");
+        wallet.setCreateDate(createDate.toLocalDateTime());
         wallet.setUserId(resultSet.getLong("userId"));
 
         Iterable<Expense> it = expenseRepository.findAllByWalletId(wallet.getId());
@@ -54,7 +57,7 @@ public class JDBCWalletRepositoryImpl implements WalletRepository {
 
     @Override
     public Wallet findById(Long id) {
-        return jdbc.queryForObject("select id, sum, typeOfWallet, userId from wallet where id = ?",
+        return jdbc.queryForObject("select id, sum, typeOfWallet, createDate, userId from wallet where id = ?",
                 this::mapRowToWallet, id);
     }
 
@@ -71,10 +74,14 @@ public class JDBCWalletRepositoryImpl implements WalletRepository {
         values.put("typeOfWallet", wallet.getTypeOfWallet().toString());
         values.put("userId", wallet.getUserId());
 
-        if(wallet.getId() != null){
+        if (wallet.getId() != null) {
             update(wallet);
             return wallet.getId();
+        } else {
+            wallet.setCreateDate(LocalDateTime.now());
         }
+
+        values.put("createDate", wallet.getCreateDate());
 
         return walletInserter.executeAndReturnKey(values).longValue();
     }
@@ -83,12 +90,20 @@ public class JDBCWalletRepositoryImpl implements WalletRepository {
         //language=SQL
         String sql = "update WALLET set SUM = ? where ID = ?";
 
-        jdbc.update(sql, wallet.getSum(), wallet.getTypeOfWallet().toString(), wallet.getId());
+        jdbc.update(sql, wallet.getSum(), wallet.getId());
     }
 
     @Override
-    public Wallet findByUserId(Long userId) {
-        return jdbc.queryForObject("select id, sum, typeOfWallet, userId from wallet where userId = ?",
-                this::mapRowToWallet, userId);
+    public Optional<Wallet> findByUserId(Long userId) {
+        Wallet wallet;
+        try {
+            String sql = "select id, sum, typeOfWallet, createDate, userId from wallet where userId = ? limit 1";
+            wallet = jdbc.queryForObject(sql, this::mapRowToWallet, userId);
+        } catch (Exception e) {
+            log.warn("First wallet not created: " + e.getMessage());
+            wallet = null;
+        }
+
+        return Optional.ofNullable(wallet);
     }
 }

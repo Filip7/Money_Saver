@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,7 +45,8 @@ public class JDBCExpenseRepositoryImpl implements ExpenseRepository {
         expense.setCost(resultSet.getBigDecimal("cost"));
         expense.setTypeOfExpense(TypeOfExpense.valueOf(resultSet.getString("typeOfExpense")));
         expense.setWalletId(resultSet.getLong("walletId"));
-        expense.setDateOfInsert(resultSet.getDate("dateOfInsert"));
+        Timestamp dateOfInsert = resultSet.getTimestamp("dateOfInsert");
+        expense.setDateOfInsert(dateOfInsert.toLocalDateTime());
 
         return expense;
     }
@@ -57,7 +59,7 @@ public class JDBCExpenseRepositoryImpl implements ExpenseRepository {
 
     @Override
     public Expense save(Expense expense) {
-        expense.setDateOfInsert(new Date());
+        expense.setDateOfInsert(LocalDateTime.now());
         expense.setId(saveExpenseDetails(expense));
 
         return expense;
@@ -72,5 +74,11 @@ public class JDBCExpenseRepositoryImpl implements ExpenseRepository {
         values.put("walletId", expense.getWalletId());
 
         return expenseInserter.executeAndReturnKey(values).longValue();
+    }
+
+    @Override
+    public Integer deleteByWalletId(Long walletId) {
+        String sql = "delete from EXPENSE where WALLETID=?";
+        return jdbc.update(sql, walletId);
     }
 }

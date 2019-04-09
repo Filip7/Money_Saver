@@ -33,7 +33,7 @@ public class MoneyAppController {
     }
 
     @ModelAttribute("typeOfExpense")
-    public TypeOfExpense[] getTypesOfExpenses(){
+    public TypeOfExpense[] getTypesOfExpenses() {
         log.info("Types of expenses fetched");
 
         return TypeOfExpense.values();
@@ -53,7 +53,7 @@ public class MoneyAppController {
     public String processForm(@Validated Expense expense, BindingResult errors, Wallet wallet, Model model) {
         log.info("Processing expense: {}", expense);
 
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             log.error("There are errors, stoping sending");
             return "insertExpense";
         }
@@ -69,7 +69,6 @@ public class MoneyAppController {
 
         model.addAttribute("currentDate", currentDate);
 
-
         wallet.getExpenses().add(expense);
         wallet.updateSum();
         wallet = walletRepository.save(wallet);
@@ -83,11 +82,13 @@ public class MoneyAppController {
     public String resetWallet(SessionStatus sessionStatus, Wallet wallet){
         log.info("Wallet reset");
         wallet.setSum(new BigDecimal(0));
+
         walletRepository.save(wallet);
+        expenseRepository.deleteByWalletId(wallet.getId());
 
         sessionStatus.setComplete();
 
-        return "redirect:/expenses/new";
+        return "redirect:/";
     }
 
 }

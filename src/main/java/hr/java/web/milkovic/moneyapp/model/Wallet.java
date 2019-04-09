@@ -4,6 +4,7 @@ import hr.java.web.milkovic.moneyapp.model.enums.TypeOfWallet;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Wallet {
     private BigDecimal sum;
     private List<Expense> expenses;
     private TypeOfWallet typeOfWallet;
+    private LocalDateTime createDate;
     private Long userId;
 
     public Wallet() {
