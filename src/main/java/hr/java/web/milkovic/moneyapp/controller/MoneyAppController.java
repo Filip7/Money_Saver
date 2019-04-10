@@ -54,7 +54,7 @@ public class MoneyAppController {
         log.info("Processing expense: {}", expense);
 
         if (errors.hasErrors()) {
-            log.error("There are errors, stoping sending");
+            log.error("There are errors, stopped sending");
             return "insertExpense";
         }
 
@@ -86,7 +86,7 @@ public class MoneyAppController {
         walletRepository.save(wallet);
         Integer numberOfDeletedExpenses = expenseRepository.deleteByWalletId(wallet.getId());
 
-        log.info("Deleted {} od expenses for user with id {}", numberOfDeletedExpenses, wallet.getUserId());
+        log.info("Deleted {} expenses for user with id {}", numberOfDeletedExpenses, wallet.getUserId());
 
         sessionStatus.setComplete();
 

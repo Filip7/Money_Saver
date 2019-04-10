@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 <head th:replace="fragments::head">
     <meta charset="UTF-8">
 </head>
@@ -42,7 +42,7 @@
                         <input class="form-control" type="number" step="1" min="1" id="cost" th:field="*{cost}"
                                placeholder="0.00">
                         <span class="alert-danger" th:if="${#fields.hasErrors('cost')}"
-                              th:errors="*{getCost}"></span>
+                              th:errors="*{cost}"></span>
                     </div>
                 </div>
 
