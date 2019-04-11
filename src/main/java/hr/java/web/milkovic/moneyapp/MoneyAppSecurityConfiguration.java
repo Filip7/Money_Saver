@@ -25,8 +25,6 @@ public class MoneyAppSecurityConfiguration extends WebSecurityConfigurerAdapter 
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled from USERS where username=?")
-                .authoritiesByUsernameQuery("select username, authority from AUTHORITIES where username=?")
                 .passwordEncoder(new BCryptPasswordEncoder(10));
     }
 
