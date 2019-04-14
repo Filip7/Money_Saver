@@ -3,8 +3,8 @@ package hr.java.web.milkovic.moneyapp.controller;
 import hr.java.web.milkovic.moneyapp.model.MoneyAppUser;
 import hr.java.web.milkovic.moneyapp.model.Wallet;
 import hr.java.web.milkovic.moneyapp.model.enums.TypeOfWallet;
-import hr.java.web.milkovic.moneyapp.repository.JDBCMoneyAppUserRepositoryImpl;
-import hr.java.web.milkovic.moneyapp.repository.JDBCWalletRepositoryImpl;
+import hr.java.web.milkovic.moneyapp.repository.UserRepository;
+import hr.java.web.milkovic.moneyapp.repository.WalletRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,11 +21,11 @@ import java.util.Optional;
 @SessionAttributes({"typeOfExpense", "wallet"})
 public class RootController {
 
-    private final JDBCWalletRepositoryImpl walletRepository;
-    private final JDBCMoneyAppUserRepositoryImpl userRepository;
+    private final WalletRepository walletRepository;
+    private final UserRepository userRepository;
 
-    public RootController(JDBCWalletRepositoryImpl walletRepository,
-                          JDBCMoneyAppUserRepositoryImpl userRepository) {
+    public RootController(WalletRepository walletRepository,
+                          UserRepository userRepository) {
         this.walletRepository = walletRepository;
         this.userRepository = userRepository;
     }

@@ -1,23 +1,26 @@
 package hr.java.web.milkovic.moneyapp.model;
 
 import hr.java.web.milkovic.moneyapp.model.enums.TypeOfExpense;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Expense {
 
-    Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @NotBlank(message = "Naziv ne smije biti prazan")
     private String name;
@@ -27,6 +30,7 @@ public class Expense {
     private BigDecimal cost;
 
     @NotNull(message = "Vrijednost mora biti odabrana")
+    @Enumerated(EnumType.STRING)
     private TypeOfExpense typeOfExpense;
 
     private Long walletId;

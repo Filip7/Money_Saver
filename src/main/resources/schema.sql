@@ -1,35 +1,35 @@
-create table if not exists users
+CREATE TABLE IF NOT EXISTS USERS
 (
-    id       identity           not null,
-    username varchar(20) unique not null,
-    password varchar(100)       not null,
-    enabled  bit                not null
+    ID       IDENTITY           NOT NULL,
+    USERNAME VARCHAR(20) UNIQUE NOT NULL,
+    PASSWORD VARCHAR(100)       NOT NULL,
+    ENABLED  BIT                NOT NULL
 );
 
-create table if not exists authorities
+CREATE TABLE IF NOT EXISTS AUTHORITIES
 (
-    username  varchar(20) not null,
-    authority varchar(20) not null
+    USERNAME  VARCHAR(20) NOT NULL,
+    AUTHORITY VARCHAR(20) NOT NULL
 );
 
-create table if not exists wallet
+CREATE TABLE IF NOT EXISTS WALLET
 (
-    id           identity                 not null,
-    sum          decimal(15, 2) default 0 not null,
-    typeOfWallet varchar(255)             not null,
-    createDate   timestamp                null,
-    userId       bigint                   not null,
-    foreign key (userId) references users (id)
+    ID           IDENTITY                 NOT NULL,
+    SUM          DECIMAL(15, 2) DEFAULT 0 NOT NULL,
+    TYPEOFWALLET VARCHAR(255)             NOT NULL,
+    CREATEDATE   TIMESTAMP                NULL,
+    USERID       BIGINT                   NOT NULL,
+    FOREIGN KEY (USERID) REFERENCES USERS (ID)
 );
 
-create table if not exists expense
+CREATE TABLE IF NOT EXISTS EXPENSE
 (
-    id            identity       not null,
-    name          varchar(255)   null,
-    cost          decimal(15, 2) null,
-    dateOfInsert  timestamp      null,
-    typeOfExpense varchar(255)   null,
-    walletId      bigint         null,
-    foreign key (walletId) references wallet (id)
+    ID            IDENTITY       NOT NULL,
+    NAME          VARCHAR(255)   NULL,
+    COST          DECIMAL(15, 2) NULL,
+    DATEOFINSERT  TIMESTAMP      NULL,
+    TYPEOFEXPENSE VARCHAR(255)   NULL,
+    WALLETID      BIGINT         NULL,
+    FOREIGN KEY (WALLETID) REFERENCES WALLET (ID)
 );
 

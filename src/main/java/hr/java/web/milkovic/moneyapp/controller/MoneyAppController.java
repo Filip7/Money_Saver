@@ -3,8 +3,8 @@ package hr.java.web.milkovic.moneyapp.controller;
 import hr.java.web.milkovic.moneyapp.model.Expense;
 import hr.java.web.milkovic.moneyapp.model.Wallet;
 import hr.java.web.milkovic.moneyapp.model.enums.TypeOfExpense;
-import hr.java.web.milkovic.moneyapp.repository.JDBCExpenseRepositoryImpl;
-import hr.java.web.milkovic.moneyapp.repository.JDBCWalletRepositoryImpl;
+import hr.java.web.milkovic.moneyapp.repository.ExpenseRepository;
+import hr.java.web.milkovic.moneyapp.repository.WalletRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +23,10 @@ import java.time.format.DateTimeFormatter;
 @SessionAttributes({"typeOfExpense", "wallet"})
 public class MoneyAppController {
 
-    private final JDBCExpenseRepositoryImpl expenseRepository;
-    private final JDBCWalletRepositoryImpl walletRepository;
+    private final ExpenseRepository expenseRepository;
+    private final WalletRepository walletRepository;
 
-    public MoneyAppController(JDBCExpenseRepositoryImpl expenseRepository, JDBCWalletRepositoryImpl walletRepository) {
+    public MoneyAppController(ExpenseRepository expenseRepository, WalletRepository walletRepository) {
 
         this.expenseRepository = expenseRepository;
         this.walletRepository = walletRepository;
