@@ -44,7 +44,7 @@ public class JDBCExpenseRepositoryImpl implements ExpenseRepository {
         expense.setName(resultSet.getString("name"));
         expense.setCost(resultSet.getBigDecimal("cost"));
         expense.setTypeOfExpense(TypeOfExpense.valueOf(resultSet.getString("typeOfExpense")));
-        expense.setWalletId(resultSet.getLong("walletId"));
+        //expense.setWalletId(resultSet.getLong("walletId"));
         Timestamp dateOfInsert = resultSet.getTimestamp("dateOfInsert");
         expense.setDateOfInsert(dateOfInsert.toLocalDateTime());
 
@@ -71,7 +71,7 @@ public class JDBCExpenseRepositoryImpl implements ExpenseRepository {
         values.put("cost", expense.getCost());
         values.put("typeOfExpense", expense.getTypeOfExpense().toString());
         values.put("dateOfInsert", expense.getDateOfInsert());
-        values.put("walletId", expense.getWalletId());
+        //values.put("walletId", expense.getWalletId());
 
         return expenseInserter.executeAndReturnKey(values).longValue();
     }

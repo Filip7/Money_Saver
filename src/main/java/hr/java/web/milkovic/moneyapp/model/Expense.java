@@ -16,10 +16,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "EXPENSE")
 public class Expense {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Naziv ne smije biti prazan")
@@ -33,7 +34,11 @@ public class Expense {
     @Enumerated(EnumType.STRING)
     private TypeOfExpense typeOfExpense;
 
-    private Long walletId;
+    /*private Long walletId;*/
+
+    @ManyToOne
+    @JoinColumn(name = "WALLETID")
+    private Wallet wallet;
 
     private LocalDateTime dateOfInsert;
 }

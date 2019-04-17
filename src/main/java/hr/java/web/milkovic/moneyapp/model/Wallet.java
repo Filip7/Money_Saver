@@ -13,14 +13,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Entity
+@Table(name = "WALLET")
 public class Wallet {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal sum;
 
-    @ManyToOne
-    @JoinColumn(name = "walletId")
+    @OneToMany(mappedBy = "wallet", fetch = FetchType.EAGER)
     private List<Expense> expenses;
 
     @Enumerated(EnumType.STRING)
