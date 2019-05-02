@@ -50,7 +50,7 @@ public class MoneyAppSecurityConfiguration extends WebSecurityConfigurerAdapter 
 
         http
                 .csrf()
-                .ignoringAntMatchers("/h2-console/**");
+                .ignoringAntMatchers("/h2-console/**", "/api/**", "/login");
         http
                 .headers()
                 .frameOptions()

@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public class JDBCExpenseRepositoryImpl implements ExpenseRepository {
@@ -52,9 +53,10 @@ public class JDBCExpenseRepositoryImpl implements ExpenseRepository {
     }
 
     @Override
-    public Expense findById(Long id) {
-        return jdbc.queryForObject("select id, name, cost, dateOfInsert, typeOfExpense, walletId from expense where id = ?",
-                this::mapRowToExpense, id);
+    public Optional<Expense> findById(Long id) {
+        return Optional
+                .ofNullable(jdbc.queryForObject("select id, name, cost, dateOfInsert, typeOfExpense, walletId from expense where id = ?",
+                        this::mapRowToExpense, id));
     }
 
     @Override
@@ -80,5 +82,12 @@ public class JDBCExpenseRepositoryImpl implements ExpenseRepository {
     public Integer deleteByWalletId(Long walletId) {
         String sql = "delete from EXPENSE where WALLETID=?";
         return jdbc.update(sql, walletId);
+    }
+
+    @Override
+    public void deleteExpenseById(Long id) {
+        //language=SQL
+        String sql = "delete from EXPENSE where ID=?";
+        jdbc.update(sql, id);
     }
 }

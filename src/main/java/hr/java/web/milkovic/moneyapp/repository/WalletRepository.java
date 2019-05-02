@@ -7,9 +7,11 @@ import java.util.Optional;
 public interface WalletRepository {
     Iterable<Wallet> findAll();
 
-    Wallet findById(Long id);
+    Optional<Wallet> findById(Long id);
 
     Wallet save(Wallet wallet);
 
     Optional<Wallet> findByUserId(Long userId);
+
+    void deleteWalletById(Long id);
 }

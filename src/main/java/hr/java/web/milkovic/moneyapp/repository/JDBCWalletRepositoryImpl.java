@@ -56,9 +56,9 @@ public class JDBCWalletRepositoryImpl implements WalletRepository {
     }
 
     @Override
-    public Wallet findById(Long id) {
-        return jdbc.queryForObject("select id, sum, typeOfWallet, createDate, userId from wallet where id = ?",
-                this::mapRowToWallet, id);
+    public Optional<Wallet> findById(Long id) {
+        return Optional.ofNullable(jdbc.queryForObject("select id, sum, typeOfWallet, createDate, userId from wallet where id = ?",
+                this::mapRowToWallet, id));
     }
 
     @Override
@@ -105,5 +105,11 @@ public class JDBCWalletRepositoryImpl implements WalletRepository {
         }
 
         return Optional.ofNullable(wallet);
+    }
+
+    @Override
+    public void deleteWalletById(Long id) {
+        String sql = "delete from WALLET where ID=?";
+        jdbc.update(sql, id);
     }
 }

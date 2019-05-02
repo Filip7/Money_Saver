@@ -35,10 +35,10 @@ public class HibernateWalletRepositoryImpl implements WalletRepository {
     }
 
     @Override
-    public Wallet findById(Long id) {
-        return entityManager
+    public Optional<Wallet> findById(Long id) {
+        return Optional.ofNullable(entityManager
                 .createQuery("select w from Wallet w where w.id = ?1", Wallet.class)
-                .setParameter(1, id).getSingleResult();
+                .setParameter(1, id).getSingleResult());
     }
 
     @Override
@@ -59,5 +59,11 @@ public class HibernateWalletRepositoryImpl implements WalletRepository {
         }
 
         return Optional.ofNullable(wallet);
+    }
+
+    @Override
+    public void deleteWalletById(Long id) {
+        Optional<Wallet> wallet = findById(id);
+        entityManager.remove(wallet);
     }
 }

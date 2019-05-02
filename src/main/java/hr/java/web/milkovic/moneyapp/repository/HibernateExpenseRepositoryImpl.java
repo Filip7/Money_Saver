@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.Optional;
 
 @Primary
 @Repository
@@ -38,11 +39,11 @@ public class HibernateExpenseRepositoryImpl implements ExpenseRepository {
     }
 
     @Override
-    public Expense findById(Long id) {
-        return entityManager
+    public Optional<Expense> findById(Long id) {
+        return Optional.ofNullable(entityManager
                 .createQuery("select e from Expense e where e.id = ?1", Expense.class)
                 .setParameter(1, id)
-                .getSingleResult();
+                .getSingleResult());
     }
 
     @Override
@@ -52,7 +53,7 @@ public class HibernateExpenseRepositoryImpl implements ExpenseRepository {
 
     @Override
     public Integer deleteByWalletId(Long walletId) {
-        Wallet wallet = walletRepository.findById(walletId);
+        Wallet wallet = walletRepository.findById(walletId).get();
         Expense expense = entityManager
                 .createQuery("select e from Expense e where e.wallet = ?1", Expense.class)
                 .setParameter(1, wallet)
@@ -61,5 +62,11 @@ public class HibernateExpenseRepositoryImpl implements ExpenseRepository {
         entityManager.remove(expense);
 
         return Integer.valueOf(walletId.toString());
+    }
+
+    @Override
+    public void deleteExpenseById(Long id) {
+        Optional<Expense> expense = findById(id);
+        entityManager.remove(expense);
     }
 }

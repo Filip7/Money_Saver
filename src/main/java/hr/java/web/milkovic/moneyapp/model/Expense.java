@@ -1,5 +1,6 @@
 package hr.java.web.milkovic.moneyapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.java.web.milkovic.moneyapp.model.enums.TypeOfExpense;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,6 +39,7 @@ public class Expense {
 
     @ManyToOne
     @JoinColumn(name = "WALLETID")
+    @JsonIgnore
     private Wallet wallet;
 
     private LocalDateTime dateOfInsert;
