@@ -33,7 +33,7 @@ public class MoneyAppSecurityConfiguration extends WebSecurityConfigurerAdapter 
         http
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/expenses/reset-wallet", "/h2-console/**")
+                .antMatchers("/expenses/reset-wallet", "/h2-console/**", "/swagger-ui.html/**")
                 .access("hasRole('ROLE_ADMIN')")
                 .anyRequest()
                 .authenticated()

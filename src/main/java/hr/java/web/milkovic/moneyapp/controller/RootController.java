@@ -35,7 +35,7 @@ public class RootController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
 
-        MoneyAppUser logedInUser = userRepository.findByUserName(currentPrincipalName);
+        MoneyAppUser logedInUser = userRepository.findByUsername(currentPrincipalName);
 
         log.info("Current user is {}, with id: {}", currentPrincipalName, logedInUser.getId());
 

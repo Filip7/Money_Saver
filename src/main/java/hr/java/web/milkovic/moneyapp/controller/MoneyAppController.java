@@ -16,6 +16,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -49,6 +51,23 @@ public class MoneyAppController {
         return "insertExpense";
     }
 
+    @GetMapping("/searchForm")
+    public String searchForm(Model model) {
+        model.addAttribute("expense", new Expense());
+        model.addAttribute("flag", "true");
+
+        return "searchExpenses";
+    }
+
+    @PostMapping("/search")
+    public String searchResults(Expense expense, Model model) {
+        Optional<List<Expense>> expenses = expenseRepository.findByNameLikeIgnoreCase(expense.getName());
+
+        expenses.ifPresent(expenseList -> model.addAttribute("expenses", expenseList));
+
+        return "searchExpenses";
+    }
+
     @PostMapping
     public String processForm(@Validated Expense expense, BindingResult errors, Wallet wallet, Model model) {
         log.info("Processing expense: {}", expense);
@@ -80,7 +99,7 @@ public class MoneyAppController {
     }
 
     @GetMapping("/reset-wallet")
-    public String resetWallet(SessionStatus sessionStatus, Wallet wallet){
+    public String resetWallet(SessionStatus sessionStatus, Wallet wallet) {
         log.info("Wallet reset");
         wallet.setSum(new BigDecimal(0));
 
