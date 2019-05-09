@@ -10,24 +10,29 @@
 
 <div class="container">
     <div class="row">
-        <div class="card col" style="width:300px">
-            <img class="card-img-top" th:src="@{/images/piggy-bank.png}" title="Icon made by Freepik www.flaticon.com"
-                 alt="Cover image"
-                 style="width:100%">
-            <div class="card-body">
-                <a th:href="@{/expenses/new}" class="btn btn-primary stretched-link">Unesi novi trošak</a>
+        <div class="card">
+            <div class="card">
+                <img class="card-img-top" th:src="@{/images/piggy-bank.png}"
+                     title="Icon made by Freepik www.flaticon.com"
+                     alt="Cover image"
+                     style="width:50%">
+                <div class="card-body">
+                    <a th:href="@{/expenses/new}" class="btn btn-primary stretched-link">Unesi novi trošak</a>
+                </div>
             </div>
         </div>
 
         <div class="col-1"></div>
 
-        <div class="card col" style="width:300px">
-            <img class="card-img-top" th:src="@{/images/magnifier.png}"
-                 title="Icon made by Egor Rumyantsev www.flaticon.com"
-                 alt="Cover image"
-                 style="width:100%">
-            <div class="card-body">
-                <a th:href="@{/expenses/searchForm}" class="btn btn-primary stretched-link">Pretraži troškove</a>
+        <div class="col">
+            <div class="card">
+                <img class="card-img-top" th:src="@{/images/magnifier.png}"
+                     title="Icon made by Egor Rumyantsev www.flaticon.com"
+                     alt="Cover image"
+                     style="width:50%">
+                <div class="card-body">
+                    <a th:href="@{/expenses/searchForm}" class="btn btn-primary stretched-link">Pretraži troškove</a>
+                </div>
             </div>
         </div>
     </div>

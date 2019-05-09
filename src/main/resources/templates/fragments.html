@@ -29,10 +29,10 @@
             <div class="dropdown-menu">
                 <div class="dropdown-header">Akcija</div>
                 <div id="admin" sec:authorize="hasRole('ADMIN')">
-                    <a class="dropdown-item" th:href="@{/h2-console}">
+                    <a class="dropdown-item" th:href="@{/h2-console}" th:target="_blank">
                         <p>H2 console</p>
                     </a>
-                    <a class="dropdown-item" th:href="@{/swagger-ui.html}">
+                    <a class="dropdown-item" th:href="@{/swagger-ui.html}" th:target="_blank">
                         <p>Swagger</p>
                     </a>
                     <div class="dropdown-divider"></div>
