@@ -77,7 +77,6 @@ public class MoneyAppController {
             return "insertExpense";
         }
 
-        //expense.setWalletId(wallet.getId());
         expense.setWallet(wallet);
         expense = expenseRepository.save(expense);
 

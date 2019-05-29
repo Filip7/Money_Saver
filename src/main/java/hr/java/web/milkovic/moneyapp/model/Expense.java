@@ -43,4 +43,9 @@ public class Expense {
     private Wallet wallet;
 
     private LocalDateTime dateOfInsert;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
