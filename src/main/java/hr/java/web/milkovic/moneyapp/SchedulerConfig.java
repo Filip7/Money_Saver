@@ -9,19 +9,22 @@ import org.springframework.context.annotation.Configuration;
 public class SchedulerConfig {
 
     @Bean
-    public JobDetail testJobDetail() {
-        return JobBuilder.newJob(ExpenseStatisticJob.class).withIdentity("trosakStatisticJob").storeDurably().build();
+    public JobDetail statisticJobDetail() {
+        return JobBuilder.newJob(ExpenseStatisticJob.class)
+                .withIdentity("expenseStatisticJob")
+                .storeDurably()
+                .build();
     }
 
     @Bean
-    public Trigger testJobTrigger() {
+    public Trigger statisticJobTrigger() {
 
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder
-                .simpleSchedule().withIntervalInSeconds(5).repeatForever();
+                .simpleSchedule().withIntervalInSeconds(10).repeatForever();
 
         return TriggerBuilder.newTrigger()
-                .forJob(testJobDetail())
-                .withIdentity("trosakStatisticTrigger")
+                .forJob(statisticJobDetail())
+                .withIdentity("expenseStatisticTrigger")
                 .withSchedule(scheduleBuilder)
                 .build();
     }

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExpenseStatisticDTO {
-    private TypeOfExpense vrstaTroska;
+    private TypeOfExpense typeOfExpense;
     private BigDecimal sum;
     private BigDecimal min;
     private BigDecimal max;
