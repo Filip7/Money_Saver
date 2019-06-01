@@ -12,11 +12,14 @@ insert into authorities (username, authority) values ('admin', 'ROLE_USER');
 insert into authorities (username, authority) values ('student', 'ROLE_USER');
 insert into authorities (username, authority) values ('filip', 'ROLE_USER');
 
+/*
 insert into wallet (id, sum, typeOfWallet, userId)
 values (1, 0, 'PHYSICAL', 1);
 insert into wallet (id, sum, typeOfWallet, userId)
 values (2, 0, 'PHYSICAL', 3);
 
+
 insert into expense (id, name, cost, TYPEOFEXPENSE, walletid) values (1, 'Test1', 100, 'HRANA', 1);
 insert into expense (id, name, cost, TYPEOFEXPENSE, walletid) values (2, 'Test2', 200, 'HRANA', 2);
 insert into expense (id, name, cost, TYPEOFEXPENSE, walletid) values (3, 'Test3', 200, 'BENZIN', 1);
+*/

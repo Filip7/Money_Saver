@@ -7,6 +7,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +29,10 @@ public class ExpenseStatisticJob extends QuartzJobBean {
 
         System.out.printf("%20s %10s %10s %10s \n", "", "SUM", "MIN", "MAX");
         for (ExpenseStatisticDTO expenseDTO : statisticList) {
-            System.out.printf("%20s %10.2f %10.2f %10.2f\n", expenseDTO.getTypeOfExpense(),
-                    expenseDTO.getSum(), expenseDTO.getMin(), expenseDTO.getMax());
+            if (!expenseDTO.getSum().equals(BigDecimal.ZERO)) {
+                System.out.printf("%20s %10.2f %10.2f %10.2f\n", expenseDTO.getTypeOfExpense(),
+                        expenseDTO.getSum(), expenseDTO.getMin(), expenseDTO.getMax());
+            }
         }
 
         System.out.print("\n\n");

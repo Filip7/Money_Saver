@@ -35,8 +35,6 @@ public class Expense {
     @Enumerated(EnumType.STRING)
     private TypeOfExpense typeOfExpense;
 
-    /*private Long walletId;*/
-
     @ManyToOne
     @JoinColumn(name = "WALLETID")
     @JsonIgnore

@@ -11,23 +11,26 @@
     <div class="col"></div>
     <div class="col">
         <div class="container">
-            <h3>Unos novog troška</h3>
+            <h3 th:text="#{insert_expense.h3_name}">Unos novog troška</h3>
             <form class="form-horizontal" method="POST" th:object="${expense}" th:action="@{/expenses/}">
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="name">Naziv: </label>
+                    <label class="control-label col-sm-2" for="name" th:text="#{insert_expense.name}">Naziv: </label>
                     <div class="col-sm-10">
                         <input class="form-control" type="text" th:field="*{name}"
-                               placeholder="Unesite naziv troška" id="name">
+                               th:placeholder="#{insert_expense.insert_name_placeholder}" id="name">
                         <span class="alert-danger mx-auto ml-auto" th:if="${#fields.hasErrors('name')}"
                               th:errors="*{name}"></span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="type">Vrsta: </label>
+                    <label class="control-label col-sm-2" for="type"
+                           th:text="#{insert_expense.typeofexpense}">Vrsta: </label>
                     <div class="col-sm-10">
                         <select class="form-control" th:field="*{typeOfExpense}" id="type">
-                            <option value="">--- Odaberite vrijednost ---</option>
+                            <option value="" th:text="#{insert_expense.typeofexpense_placeholder}">--- Odaberite
+                                vrijednost ---
+                            </option>
                             <option th:each="type : ${typeOfExpense}" th:value="${type}"
                                     th:text="${type}"></option>
                         </select>
@@ -37,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="cost">Iznos: </label>
+                    <label class="control-label col-sm-2" for="cost" th:text="#{insert_expense.cost}">Iznos: </label>
                     <div class="col-sm-10">
                         <input class="form-control" type="number" step="1" min="1" id="cost" th:field="*{cost}"
                                placeholder="0.00">
@@ -48,7 +51,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Spremi</button>
+                        <button type="submit" class="btn btn-primary" th:text="#{insert_expense.save}">Spremi</button>
                     </div>
                 </div>
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>

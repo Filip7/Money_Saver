@@ -10,16 +10,49 @@
     <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
     <script th:src="@{/js/popper.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
-    <title>Money saver</title>
+    <title th:text="#{app_name}"></title>
+
+    <script>
+        $(document).ready(function () {
+            $("#locales").change(function () {
+                var selectedOption = $('#locales').val();
+                if (selectedOption !== '') {
+                    window.location.replace('?language=' + selectedOption);
+                }
+            })
+        });
+    </script>
 </head>
 <body>
+
+<div th:fragment="lang-choice">
+    <div class="float-left">
+        <select id="locales" class="dropdown">
+            <option value="hr"
+                    class="dropdown-item"
+                    th:selected="${#locale.language == 'hr'}"
+                    th:text="#{lang.hr}"></option>
+            <option value="en"
+                    class="dropdown-item"
+                    th:selected="${#locale.language == 'en'}"
+                    th:text="#{lang.en}"></option>
+            <option value="fr"
+                    class="dropdown-item"
+                    th:selected="${#locale.language == 'fr'}"
+                    th:text="#{lang.fr}"></option>
+        </select>
+    </div>
+</div>
+
 <div th:fragment="navbar" id="logo-title">
     <nav class="navbar navbar-dark bg-primary sticky-top">
         <a class="navbar-brand" th:href="@{/}">
             <img th:src="@{/images/baseline_euro_symbol_black_18dp.png}" width="36" height="36"
                  class="d-inline-block align-top" alt="" style="margin-top: 10px;">
-            <div class="custom-h1 d-inline-block align-top">Money saver</div>
+            <div class="custom-h1 d-inline-block align-top" th:text="#{app_name}">Money saver</div>
         </a>
+
+        <div th:replace="fragments::lang-choice"></div>
 
         <div class="dropdown dropleft">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
@@ -27,8 +60,10 @@
                 Korisnik
             </button>
             <div class="dropdown-menu">
-                <div class="dropdown-header">Akcija</div>
+                <div class="dropdown-header" th:text="#{menu.action}">Akcija</div>
+
                 <div id="admin" sec:authorize="hasRole('ADMIN')">
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" th:href="@{/h2-console}" th:target="_blank">
                         <p>H2 console</p>
                     </a>
@@ -40,7 +75,7 @@
 
                 <div class="dropdown-item">
                     <form th:action="@{/logout}" method="post">
-                        <input type="submit" class="btn btn-danger" value="Odjava"/>
+                        <input type="submit" class="btn btn-danger" th:value="#{menu.signoff}"/>
                     </form>
                 </div>
             </div>
@@ -54,8 +89,11 @@
         <a class="navbar-brand" th:href="@{/}">
             <img th:src="@{/images/baseline_euro_symbol_black_18dp.png}" width="36" height="36"
                  class="d-inline-block align-top" alt="" style="margin-top: 10px;">
-            <div class="custom-h1 d-inline-block align-top">Money saver</div>
+            <div class="custom-h1 d-inline-block align-top" th:text="#{app_name}">Money saver</div>
         </a>
+
+        <div th:replace="fragments::lang-choice"></div>
+
     </nav>
     <br>
 </div>

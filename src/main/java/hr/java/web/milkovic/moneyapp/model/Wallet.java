@@ -34,7 +34,10 @@ public class Wallet {
     }
 
     public void updateSum() {
-        sum = expenses.stream().map(expense -> expense.getCost().negate()).reduce(BigDecimal::add).get();
+        sum = expenses.stream()
+                .map(expense -> expense.getCost().negate())
+                .reduce(BigDecimal::add)
+                .get();
     }
 
 }

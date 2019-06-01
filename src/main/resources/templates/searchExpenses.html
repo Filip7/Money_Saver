@@ -11,13 +11,13 @@
 <div class="row">
     <div class="col"></div>
     <div class="col">
-        <h2>Pretraga troškova</h2>
+        <h2 th:text="#{search.title}">Pretraga troškova</h2>
         <form class="form-group" method="POST" th:object="${expense}" th:action="@{/expenses/search}">
-            <label for="name">Unesite naziv troška:</label>
+            <label for="name" th:text="#{search.expense_name}">Unesite naziv troška:</label>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" id="name" th:field="*{name}">
                 <div class="input-group-append">
-                    <button class="btn btn-success" type="submit">Pretraži</button>
+                    <button class="btn btn-success" type="submit" th:text="#{search.search}">Pretraži</button>
                 </div>
             </div>
         </form>
@@ -25,9 +25,9 @@
         <table class="table table-striped table-hover" th:if="${expenses}">
             <thead class="thead-dark">
             <tr>
-                <th>Naziv</th>
-                <th>Iznos</th>
-                <th>Vrsta troška</th>
+                <th th:text="#{search.name}">Naziv</th>
+                <th th:text="#{search.price}">Iznos</th>
+                <th th:text="#{insert_expense.typeofexpense}">Vrsta troška</th>
             </tr>
             </thead>
             <tbody>
@@ -40,7 +40,7 @@
         </table>
         <div class="alert alert-warning alert-dismissible" th:unless="${expenses}" th:if="${flag} == null">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            Nije pronađen trošak sa unesenim nazivom!
+            <span th:text="#{search.notfound}">Nije pronađen trošak sa unesenim nazivom!</span>
         </div>
     </div>
     <div class="col"></div>

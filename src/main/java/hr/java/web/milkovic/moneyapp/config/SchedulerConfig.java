@@ -1,4 +1,4 @@
-package hr.java.web.milkovic.moneyapp;
+package hr.java.web.milkovic.moneyapp.config;
 
 import hr.java.web.milkovic.moneyapp.scheduler.ExpenseStatisticJob;
 import org.quartz.*;

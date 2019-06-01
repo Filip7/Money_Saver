@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 <head th:replace="fragments::head">
     <meta charset="UTF-8">
     <title>Money saver</title>
@@ -9,12 +9,13 @@
 <div th:replace="fragments::navbar"></div>
 <div class="container">
     <div class="row">
-        <h1 class="text-center">Stranica ne postoji!</h1>
+        <h1 class="text-center" th:text="#{error.message}">Stranica ne postoji!</h1>
     </div>
     <div class="row align-items-center">
         <a th:href="@{/}">
             <button type="button" class="btn-dark text-light">
-                <span class="glyphicon glyphicon-chevron-left"></span> Povratak na početnu stranicu
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span th:text="#{error.backbutton}"> Povratak na početnu stranicu</span>
             </button>
         </a>
     </div>

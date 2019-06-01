@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
->
+<html lang="hr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head">
     <meta charset="UTF-8">
     <title>Money saver</title>
@@ -17,7 +16,8 @@
                      alt="Cover image"
                      style="width:50%">
                 <div class="card-body">
-                    <a th:href="@{/expenses/new}" class="btn btn-primary stretched-link">Unesi novi trošak</a>
+                    <a th:href="@{/expenses/new}" class="btn btn-primary stretched-link"
+                       th:text="#{index.insert_expense}">Unesi novi trošak</a>
                 </div>
             </div>
         </div>
@@ -31,7 +31,8 @@
                      alt="Cover image"
                      style="width:50%">
                 <div class="card-body">
-                    <a th:href="@{/expenses/searchForm}" class="btn btn-primary stretched-link">Pretraži troškove</a>
+                    <a th:href="@{/expenses/searchForm}" class="btn btn-primary stretched-link"
+                       th:text="#{index.search_expenses}">Pretraži troškove</a>
                 </div>
             </div>
         </div>

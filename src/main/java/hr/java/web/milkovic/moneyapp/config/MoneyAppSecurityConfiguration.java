@@ -1,4 +1,4 @@
-package hr.java.web.milkovic.moneyapp;
+package hr.java.web.milkovic.moneyapp.config;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +33,8 @@ public class MoneyAppSecurityConfiguration extends WebSecurityConfigurerAdapter 
         http
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .antMatchers("/login/**")
+                .permitAll()
                 .antMatchers("/expenses/reset-wallet", "/h2-console/**", "/swagger-ui.html/**")
                 .access("hasRole('ROLE_ADMIN')")
                 .anyRequest()
